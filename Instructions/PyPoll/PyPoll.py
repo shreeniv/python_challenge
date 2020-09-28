@@ -22,6 +22,20 @@ with open(csvpath) as csvfile:
     for row in csvreader:
         voters.append(row[0])
         candidate.append(row[2])
+   
+    # printing the values fpr Total number of votes
+    print("Election Results")
+    print("-" * 100 )
+    print(f"Total Votes: {len(voters)}")
+    print("-" * 100 )
+    
+    # list of commands for writing to output text file
+    file = open("output.txt","w")
+    file.write("Election Results" + "\n")
+    file.write("-" * 100 + "\n")
+    file.write((f"Total Votes: {len(voters)}") + "\n")
+    file.write("-" * 100 + "\n")
+
     #fetching the candidates in ascending alphabetical order and storing them in cand_list
     cand_list = list(set(candidate))
     cand_list.sort()
@@ -31,28 +45,19 @@ with open(csvpath) as csvfile:
     for x in cand_list:
         vote = votes_per_cand.append(candidate.count(x))
         #print(x)
-        
+
+    # loop to fetch the percentage of votes each candidate won and to calculate total number of votes for them    
     for c in range(len(cand_list)):
         print(f"{cand_list[c]}: {'{:.2%} '.format(votes_per_cand[c]/len(candidate))}({votes_per_cand[c]})")
-    
+        file.write((f"{cand_list[c]}: {'{:.2%} '.format(votes_per_cand[c]/len(candidate))}({votes_per_cand[c]})") + "\n")
+
+    # printing winner of the election based on popular vote   
+    print("-" * 100 )
     print(f"Winner: {cand_list[votes_per_cand.index(max(votes_per_cand))]}")
-
-  #  for x in cand:
-  #  if x not in output:
-  #      output.append(x)
-  #      print(output)
-
-print("Election Results")
-print("-" * 100 )
-print(f"Total Votes: {len(voters)}")
-print("-" * 100 )
-print(f"Winner: {cand_list[votes_per_cand.index(max(votes_per_cand))]}")
-
-file = open("output.txt","w")
-file.write("Election Results" + "\n")
-file.write("-" * 100 + "\n")
-file.write((f"Total Votes: {len(voters)}") + "\n")
-file.write("-" * 100 + "\n")
-file.close()
-
-
+    print("-" * 100 )
+    
+    # writing winner to the file
+    file.write("-" * 100 + "\n")
+    file.write((f"Winner: {cand_list[votes_per_cand.index(max(votes_per_cand))]}") + "\n")
+    file.write("-" * 100 + "\n")
+    file.close()
