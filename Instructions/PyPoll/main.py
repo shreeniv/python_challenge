@@ -30,7 +30,7 @@ with open(csvpath) as csvfile:
     print("-" * 100 )
     
     # list of commands for writing to output text file
-    file = open("output.txt","w")
+    file = open("Analysis\output.txt","w")
     file.write("Election Results" + "\n")
     file.write("-" * 100 + "\n")
     file.write((f"Total Votes: {len(voters)}") + "\n")
